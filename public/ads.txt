@@ -1,0 +1,5 @@
+# ClipLab1 ads.txt placeholder
+# Replace this file with your authorized digital sellers entries when enabling ads.
+# Format: <exchange domain>, <publisher account ID>, <DIRECT or RESELLER>, <certification authority ID>
+# Example (Google AdSense):
+# google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,183 @@
+@import "tailwindcss";
+@import "@fontsource/oswald/600.css";
+@import "@fontsource/oswald/700.css";
+@import "@fontsource/dm-sans/400.css";
+@import "@fontsource/dm-sans/500.css";
+@import "@fontsource/dm-sans/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+@font-face {
+  font-family: 'Bangers';
+  src: url('/fonts/caption-bangers.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Luckiest Guy';
+  src: url('/fonts/caption-luckiest-guy.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url('/fonts/caption-anton.ttf') format('truetype');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat ExtraBold';
+  src: url('/fonts/caption-montserrat-extrabold.ttf') format('truetype');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg-asphalt: #0e1217;
+  --bg-concrete: #151b22;
+  --bg-panel: #1c242e;
+  --bg-elevated: #232d3a;
+  --border-hairline: #2a3544;
+  --border-strong: #39475a;
+  --text-primary: #eef2f6;
+  --text-secondary: #9aa7b8;
+  --text-muted: #6c7a8c;
+  --accent-amber: #e59a24;
+  --accent-amber-hover: #f0ab3c;
+  --accent-amber-ink: #0e1217;
+  --danger-crimson: #dc3545;
+  --success-sage: #2ea043;
+  --font-display: 'Oswald', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    background-color: var(--bg-asphalt);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--bg-asphalt);
+    color: var(--text-primary);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-mono-num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent-amber);
+    outline-offset: 2px;
+  }
+}
+
+/* Subtle film grain & halftone grit texture (pure CSS, zero external assets) */
+.film-grain-layer {
+  background-image:
+    radial-gradient(rgba(238, 242, 246, 0.045) 1px, transparent 0),
+    radial-gradient(rgba(14, 18, 23, 0.25) 1px, transparent 0);
+  background-size: 6px 6px, 4px 4px;
+  background-position: 0 0, 2px 2px;
+}
+
+.halftone-grid {
+  background-image: radial-gradient(rgba(154, 167, 184, 0.1) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* Checkerboard for transparent watermark preview */
+.alpha-checkerboard {
+  background-color: #161c24;
+  background-image:
+    linear-gradient(45deg, #1f2732 25%, transparent 25%),
+    linear-gradient(-45deg, #1f2732 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, #1f2732 75%),
+    linear-gradient(-45deg, transparent 75%, #1f2732 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0;
+}
+
+@keyframes heroSceneCycle1 {
+  0%, 20% { opacity: 1; }
+  25%, 95% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes heroSceneCycle2 {
+  0%, 20% { opacity: 0; }
+  25%, 45% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+@keyframes heroSceneCycle3 {
+  0%, 45% { opacity: 0; }
+  50%, 70% { opacity: 1; }
+  75%, 100% { opacity: 0; }
+}
+
+@keyframes heroSceneCycle4 {
+  0%, 70% { opacity: 0; }
+  75%, 95% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.hero-scene-1 {
+  opacity: 1;
+  animation: heroSceneCycle1 32s ease-in-out infinite;
+}
+
+.hero-scene-2 {
+  opacity: 0;
+  animation: heroSceneCycle2 32s ease-in-out infinite;
+}
+
+.hero-scene-3 {
+  opacity: 0;
+  animation: heroSceneCycle3 32s ease-in-out infinite;
+}
+
+.hero-scene-4 {
+  opacity: 0;
+  animation: heroSceneCycle4 32s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-scene-1 {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .hero-scene-2,
+  .hero-scene-3,
+  .hero-scene-4 {
+    animation: none !important;
+    opacity: 0 !important;
+  }
+}
+

@@ -1,0 +1,33 @@
+/*
+  Static hosting security & cache headers (Cloudflare Pages format; ignored on GitHub Pages).
+  Deliberately excludes COOP/COEP and CSP so single-threaded FFmpeg WASM, Web Workers,
+  on-device Whisper downloads, and optional third-party ad scripts operate without blocks.
+*/
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/ffmpeg/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/*.png
+  Cache-Control: public, max-age=604800
+
+/*.ico
+  Cache-Control: public, max-age=604800
+
+/*.svg
+  Cache-Control: public, max-age=604800
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
