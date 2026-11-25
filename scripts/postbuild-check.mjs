@@ -53,9 +53,23 @@ function checkDeploymentSizes() {
   }
 }
 
+function isVerificationHtml(relPath) {
+  return /^google[a-z0-9]+\.html$/i.test(relPath) || relPath.startsWith('assets/');
+}
+
 function checkPreRenderedHtml() {
-  const htmlFiles = walkFiles(distDir).filter((f) => f.relPath.endsWith('.html'));
+  const allHtmlFiles = walkFiles(distDir).filter((f) => f.relPath.endsWith('.html'));
+  const verificationHtmlFiles = allHtmlFiles.filter((f) => /^google[a-z0-9]+\.html$/i.test(f.relPath));
+  const htmlFiles = allHtmlFiles.filter((f) => !isVerificationHtml(f.relPath));
   let errors = 0;
+
+  for (const vf of verificationHtmlFiles) {
+    const content = fs.readFileSync(path.join(distDir, vf.relPath), 'utf8').trim();
+    if (!content.startsWith('google-site-verification:')) {
+      console.error(`[seo-audit] Invalid Google verification file ${vf.relPath}`);
+      errors++;
+    }
+  }
 
   const knownStaticTargets = new Set(
     htmlFiles

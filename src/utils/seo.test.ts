@@ -366,3 +366,12 @@ test('index.html includes the popunder before </head> and Social Bar before </bo
     /<script data-cfasync="false" src="https:\/\/bauval\.org\/14\/a66b0375291a89c1da883d4d85555727"><\/script>\s*<\/body>/
   );
 });
+
+test('Google Search Console verification file exists at public root with exact content', () => {
+  const verifyPath = path.join(process.cwd(), 'public/google978630c5644c9416.html');
+  assert.equal(fs.existsSync(verifyPath), true, 'Verification file must remain in public/');
+  assert.equal(
+    fs.readFileSync(verifyPath, 'utf8').trim(),
+    'google-site-verification: google978630c5644c9416.html'
+  );
+});
