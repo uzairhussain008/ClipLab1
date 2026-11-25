@@ -348,3 +348,21 @@ test('HomePage removes Try Sample Clip CTA in favor of #what-you-can-make while 
   assert.match(editorPage, /Try Sample Clip/);
 });
 
+test('index.html includes the popunder before </head> and Social Bar before </body> once each', () => {
+  const indexHtml = fs.readFileSync(path.join(process.cwd(), 'index.html'), 'utf8');
+  const popunderTag =
+    '<script data-cfasync="false" src="https://abscloud.org/1/6a40d565a042a63b916a2daffac2d4e6"></script>';
+  assert.equal(indexHtml.split(popunderTag).length - 1, 1, 'Popunder script must appear once');
+  assert.match(
+    indexHtml,
+    /<script data-cfasync="false" src="https:\/\/abscloud\.org\/1\/6a40d565a042a63b916a2daffac2d4e6"><\/script>\s*<\/head>/
+  );
+
+  const socialBarTag =
+    '<script data-cfasync="false" src="https://bauval.org/14/a66b0375291a89c1da883d4d85555727"></script>';
+  assert.equal(indexHtml.split(socialBarTag).length - 1, 1, 'Social Bar script must appear once');
+  assert.match(
+    indexHtml,
+    /<script data-cfasync="false" src="https:\/\/bauval\.org\/14\/a66b0375291a89c1da883d4d85555727"><\/script>\s*<\/body>/
+  );
+});
